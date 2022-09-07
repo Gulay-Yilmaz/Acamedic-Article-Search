@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+    <head>
+        <title>DataViz</title>
+ 
+        <style type="text/css">
+            #viz {
+                width: auto;
+                height: 600px;
+            }
+        </style>
+        <script src="https://cdn.neo4jlabs.com/neovis.js/v1.5.0/neovis.js"></script>
+  
+    </head>   
+    <script>
+        
+        function draw() {
+            var config = {
+                container_id: "viz",
+                server_url: "Your Neo4j url",
+                server_user: "Your Username",
+                server_password: "Your Password",
+                labels: {
+                    "Author": {
+                        caption: "user_key",
+                        size: "pagerank",
+                        community: "community"
+                    }
+                },
+                relationships: {
+                    "RETWEETS": {
+                        caption: true,
+                        thickness: "count"
+                    }
+                },
+                initial_cypher: "Match(a:Author)-[r:ortak_calısır]->(b:Author), (h:Author)-[r2:ortak_calısır]->(i:Author) , (a)-[r3:yayın_yazarı]->(c:Publications), (c)-[r4:yayınlanır]->(d:Types), (n) return n,r,r2,r3,r4"
+            }
+            console.log(config);
+
+            var viz = new NeoVis.default(config);
+            viz.render();
+            viz.registerOnEvent("completed", (e)=>{
+    viz["_network"].on("click", (event)=>{
+        console.log($('.vis-tooltip').text()); //get node properties
+    });
+});
+        }
+    </script>
+    <body onload="draw()">
+        <ul style="background-color: #7eb3b9; ">
+            <li style="text-decoration-color: #000;"><a href="{% url 'adminLogin' %}"><b>YÖNETİCİ PANELİ</b></a></li>
+            <li style="color: #000;"><a href="{% url 'graphVisualization' %}"><b>Genel Graf</b></a></li>
+            <li style="color: #000;"><a href="{% url 'home' %}"><b>Anasayfa</b></a></li>
+        </ul>
+        <div id="viz"></div>
+
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Yönetici Anasayfa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/custom.css">
+</head>
+
+<body>
+    <header>
+        <div class="wrapper">
+            <ul class="nav-area">
+                <li><a href="{% url 'addAuthor' %}">Araştırmacı Ekleme</a></li>
+                <li><a href="{% url 'addCoauthor' %}">Ortak Araştırmacı Ekleme</a></li>
+                <li><a href="{% url 'addJournal' %}">Yayın Ekleme</a></li>
+                <li><a href="{% url 'addType' %}">Tür Ekleme</a></li>
+                <li><a href="{% url 'typePublication' %}">Tür Yayın İlişkisi</a></li>
+                <li><a href="{% url 'home' %}">Çıkış Yap</a></li>
+                
+            </ul>
+        </div>
+        <div class="welcome-text">
+            <h1>YÖNETİM PANELİNE <span>HOŞGELDİNİZ</span></h1>
+        </div>
+    </header>
+
+</body>
+
+</html>

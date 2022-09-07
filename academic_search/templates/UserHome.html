@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kullanıcı Anasayfa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+
+<body>
+    <header>
+        <div class="wrapper">
+            <ul class="nav-area">
+                <li><a href="{% url 'adminLogin' %}">YÖNETİCİ PANELİ</a></li>
+                <li><a href="{% url 'graphVisualization' %}">Genel Graf</a></li>
+            </ul>
+        </div>
+        <!-- <div class="welcome-text"> -->
+        <h1 style="color: rgb(255, 255, 255);"> Akademik <span style="color: rgb(0, 255, 204);">Arama</span></h1>
+
+        <div style="position: absolute;
+            top: 200px; left: 140px;">
+            <form method="post" enctype="multipart/form-data" action="{% url 'home' %}"
+                style="max-width: 350px; margin:0 auto; ">
+                {% csrf_token %}
+                {% if error %}
+                <div class="alert alert-danger">
+                    {{error}}
+                </div>
+                {% endif %}
+                {{login_faild}}
+
+                <div style="color: rgb(255, 255, 255);">
+                    {{formRadio}}
+
+                </div>
+
+                <p class="container-fuild text-center " style="margin: 10px;">
+
+                    <input type="submit" value="Arama Yap" class="btn btn-outline-light" />
+                    <!-- style="background: -webkit-linear-gradient( rgb(47, 119, 179),rgb(0, 255, 204));-webkit-text-fill-color: white; width:200px;" /> -->
+                </p>
+        </div>
+        <div style="position: absolute;
+        top: 200px; left: 600px;">
+   
+                <table border = "3" style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(75, 75, 75); width: 100%; ">
+                    <thead style="background-color: rgb(70, 116, 107);  color: rgb(0, 0, 0);">
+                    <td ><b>{{column.ID}}</b></td>
+                    <td ><b>{{column.name}}</b></td>
+                    <td ><b>{{column.surname}}</b></td>
+                    <td ><b>{{column.name2}}</b></td>
+                    <td ><b>{{column.surname2}}</b></td>
+                    </thead>
+                    
+
+                    {% for val in table %}
+                    
+                    <tr style="background-color: rgb(181, 190, 199);  color: rgb(0, 0, 0); border-color: rgb(75, 75, 75);">
+                        <td style="border-color: rgb(75, 75, 75);">{{val.id}}</td>
+                        <td style="border-color: rgb(75, 75, 75);">{{val.name}}</td>
+                        <td style="border-color: rgb(75, 75, 75);">{{val.surname}}</td>
+                        <td style="border-color: rgb(75, 75, 75);"><a href="http://127.0.0.1:8000/author/{{val.name2}}/{{val.surname2}}/"> {{val.name2}} </a></td>
+                        <td style="border-color: rgb(75, 75, 75);">{{val.surname2}}</td>
+
+                    </tr>
+                
+<script type="text/javascript">
+    document.getElementById('name').href = 'http://127.0.0.1:8000/author/name+'+document.getElementsByTagName('div')[0].name+'/surname'+document.getElementsByTagName('div')[0].surname+'/'  ;
+</script>
+                
+                    {% endfor %}
+                </table>
+
+                <table border = "3" style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(75, 75, 75); width: 100%; margin-top: 10px;">
+                    <thead style="background-color: rgb(70, 116, 107);  color: rgb(0, 0, 0);">
+                    <td ><b>{{column2.ID}}</b></td>
+                    <td ><b>{{column2.name}}</b></td>
+                    <td ><b>{{column2.surname}}</b></td>
+                    <td ><b>{{column2.publicationName}}</b></td>
+                    <td ><b>{{column2.year}}</b></td>
+                    <td ><b>{{column2.place}}</b></td>
+                    <td ><b>{{column2.type}}</b></td>
+                    </thead>
+                    
+
+                    {% for val2 in table2 %}
+                    
+                    <tr style="background-color: rgb(181, 190, 199);  color: rgb(0, 0, 0); border-color: rgb(75, 75, 75);">
+                        <td style="border-color: rgb(75, 75, 75);">{{val2.id}}</td>
+                        <td style="border-color: rgb(75, 75, 75);">{{val2.name}}</td>
+                        <td style="border-color: rgb(75, 75, 75);">{{val2.surname}}</td>
+                        <td style="border-color: rgb(75, 75, 75);">{{val2.publicationName}}</td>
+                        <td style="border-color: rgb(75, 75, 75);">{{val2.year}}</td>
+                        <td style="border-color: rgb(75, 75, 75);">{{val2.place}}</td>
+                        <td style="border-color: rgb(75, 75, 75);">{{val2.type}}</td>
+                    </tr>
+                
+                    {% endfor %}
+                </table>
+
+                <p class="container-fuild text-center " style="margin: 10px;">
+                    <a class= "btn btn-outline-light" href = "http://127.0.0.1:8000/query/{{field}}/{{value}}/" target="_blank">Graf</a>
+                </p>
+
+
+        </div>
+
+    </header>
+
+</body>
+
+</html>

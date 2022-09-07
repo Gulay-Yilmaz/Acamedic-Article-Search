@@ -1,0 +1,14 @@
+
+#map {
+
+	width: 200px;
+	background: lightblue;
+	display: inline-block;
+  }
+#user {
+
+width: calc(100% - 200px);
+background: lightgreen;
+display: inline-block;
+}
+
